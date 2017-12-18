@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PCLCompatibilityTest.Views.MainPage"
+             xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+             xmlns:local="clr-namespace:PCLCompatibilityTest.Services"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             Title="CompatibleTest">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.5*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <local:AnimationModel />
+        <oxy:PlotView Grid.Row="1" Model="{Binding BarChart}" />
+        <Label Grid.Row="2" Text="やる気パラメータ" HorizontalOptions="Center" VerticalOptions="End" />
+        <Slider Grid.Row="3" Maximum="100.0" Minimum = "0.0" Value="0">
+            <Slider.Behaviors>
+                <b:EventToCommandBehavior EventName="ValueChanged"
+                                          Command="{Binding UpdateContentsCommand}"
+                                          EventArgsParameterPath="NewValue" />
+            </Slider.Behaviors>
+        </Slider>
+
+    </Grid>
+    
+</ContentPage>
